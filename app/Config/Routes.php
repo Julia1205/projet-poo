@@ -38,6 +38,10 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 //$routes->get('/', 'Home::index');
 $routes->get('/', 'Cocktails::fetchCocktails');
+/*-- L'accès à la page d'accueil --*/
+$routes->get('/home', 'Home::index');
+/*-- L'accès à la page du layout pour les essais --*/
+$routes->get('/layout', 'Home::layout');
 
 
 /*
