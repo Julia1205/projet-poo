@@ -1,0 +1,4 @@
+app/Config/Database.php
+.env
+writable/*
+.idea/
