@@ -19,4 +19,19 @@ class Users extends BaseController
     {
         # code...
     }
+
+    public function addUSer(Type $var = null)
+    {
+        # code...
+    }
+
+    public function updateUser(Type $var = null)
+    {
+        # code...
+    }
+
+    public function connectUser(Type $var = null)
+    {
+        # code...
+    }
 }
