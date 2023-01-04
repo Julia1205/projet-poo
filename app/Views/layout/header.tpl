@@ -29,7 +29,7 @@
                 </li>
                 {*On affiche si on est pas connecté*}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Log In</a>
+                    <a class="nav-link" href="{base_url('/login')}">Log In</a>
                 </li>
                 {*Fin de l'affichage hors connexion*}
                 {*On affiche si on est connecté*}
@@ -37,7 +37,7 @@
                     <a class="nav-link" href="#">New cocktail</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Log Out</a>
+                    <a class="nav-link" href="{base_url('/logout')}">Log Out</a>
                 </li>
                 {*Fin de l'affichage en connexion*}
             </ul>
