@@ -42,6 +42,9 @@
     --bs-btn-disabled-border-color: var(--purple-dark);
     --bs-gradient: none;
 }
+.border-purple {
+    border-color: var(--purple-dark);
+}
 /*On change la couleur du border bottom de la liste dans le footer*/
 #footer-list {
     border-bottom: 1px solid var(--purple-dark);
