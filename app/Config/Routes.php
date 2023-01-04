@@ -40,8 +40,6 @@ $routes->set404Override();
 $routes->get('/', 'Cocktails::fetchCocktails');
 /*-- L'accès à la page d'accueil --*/
 $routes->get('/home', 'Home::index');
-/*-- L'accès à la page du layout pour les essais --*/
-$routes->get('/layout', 'Home::layout');
 
 
 /*
