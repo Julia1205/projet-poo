@@ -42,7 +42,7 @@
     --bs-btn-disabled-border-color: var(--purple-dark);
     --bs-gradient: none;
 }
-/*On change la couleur du border bottom*/
+/*On change la couleur du border bottom de la liste dans le footer*/
 #footer-list {
     border-bottom: 1px solid var(--purple-dark);
 }
