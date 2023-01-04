@@ -20,18 +20,45 @@ class Users extends BaseController
         # code...
     }
 
-    public function addUSer(Type $var = null)
+    /**
+     *
+     */
+    public function addUSer(): void
     {
         # code...
+        //Redirige vers register
+        $this->display('user/register.tpl');
     }
 
-    public function updateUser(Type $var = null)
+    /**
+     *
+     */
+    public function updateUser(): void
     {
         # code...
+        //redirige vers la fiche utilisateur
+        $this->display('user/account.tpl');
     }
 
-    public function connectUser(Type $var = null)
+    /**
+     *
+     */
+    public function connectUser(): void
     {
         # code...
+        //redirige vers page de connexion
+        $this->display('user/login.tpl');
+        //Ou home si connexion réussie
+        //$this->display('home/home.tpl');
+    }
+
+    /**
+     *
+     */
+    public function disconnectUser(): void
+    {
+        # code...
+        //On redirige vers home quand déconnecté
+        $this->display('home/home.tpl');
     }
 }

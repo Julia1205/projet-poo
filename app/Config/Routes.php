@@ -41,6 +41,15 @@ $routes->get('/', 'Cocktails::fetchCocktails');
 /*-- L'accès à la page d'accueil --*/
 $routes->get('/home', 'Home::index');
 
+/*La partie de gestion des utilisateurs*/
+/*-- L'accès à la page de connexion pour l'utilisateur --*/
+$routes->get('/login', 'Users::connectUser');
+/*-- L'accès à la page de déconnexion pour l'utilisateur --*/
+$routes->get('/logout', 'Users::disconnectUser');
+/*-- L'accès à la page de déconnexion pour l'utilisateur --*/
+$routes->get('/register', 'Users::addUser');
+/*-- L'accès à la page de déconnexion pour l'utilisateur --*/
+$routes->get('/account', 'Users::updateUser');
 
 /*
  * --------------------------------------------------------------------
