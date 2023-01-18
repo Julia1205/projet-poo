@@ -19,7 +19,6 @@ class Cocktail_ingredient_model extends Model{
 
     public function addCocktailIngredient($arrCocktailIngredients)
     {
-        var_dump($arrCocktailIngredients);
         foreach ($arrCocktailIngredients as $arrIngredient) {
             //checking if this association doesn't already exists
             if($arrIngredient !== 'undefined'){
@@ -32,17 +31,16 @@ class Cocktail_ingredient_model extends Model{
                     $arrCocktailIngredientToSave["cocktail_ingredient_quantity"] = $arrIngredient["cocktail_ingredient_quantity"];
                     $cocktail_ingredient_entity = new Cocktail_ingredient_entity;
                     $cocktail_ingredient_entity->fill($arrCocktailIngredientToSave);  
-                    //var_dump($cocktail_ingredient_entity);
                     $this->save($cocktail_ingredient_entity);
                 }else{// if there is already this ingredient for this cocktail
-                    if($objCocktailIngredient->cocktail_ingredient_quantity !== $arrIngredient["cocktail_ingredient_quantity"]){
+                    /* TODO comment il construit $cocktail_ingredient_entity ?
+					if($objCocktailIngredient->cocktail_ingredient_quantity !== $arrIngredient["cocktail_ingredient_quantity"]){
                         $this->where('cocktail_ingredient_cocktail_id', $arrIngredient["cocktail_ingredient_cocktail_id"])
                           ->where("cocktail_ingredient_ingredient_id", $ingredient_model->addIngredient($arrIngredient["ingredient_name"]))
                           ->update($cocktail_ingredient_entity);
-                    }
+                    }*/
                 }
                 //if cocktail_ingredient doesn't exists
-                var_dump($arrIngredient);
             }
         }
 
