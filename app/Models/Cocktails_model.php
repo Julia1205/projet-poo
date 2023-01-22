@@ -59,4 +59,10 @@ class Cocktails_model extends Model{
             return $exists->cocktail_id;
         }
     }
+
+    public function getCocktailByID($intId)
+    {
+        $objCocktail = $this->where('cocktail_id', $intId)->first();
+        return $objCocktail;
+    }
 }

@@ -37,9 +37,9 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 //$routes->get('/', 'Home::index');
-$routes->get('/', 'Cocktails::fetchCocktails');
+$routes->get('/fetch', 'Cocktails::fetchCocktails');
 /*-- L'accès à la page d'accueil --*/
-$routes->get('/home', 'Home::index');
+$routes->get('/', 'Home::index');
 
 /*La partie de gestion des utilisateurs*/
 /*-- L'accès à la page de connexion pour l'utilisateur --*/

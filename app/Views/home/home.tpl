@@ -1,6 +1,5 @@
 {extends file="layout/layout.tpl"}
 {*On modifie le title*}
-{block name="title"}Accueil{/block}
 {*On modifie le contenu*}
 {block name="content"}
     <div class="justify-content-evenly row">

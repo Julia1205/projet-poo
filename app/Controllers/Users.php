@@ -27,7 +27,6 @@ class Users extends BaseController
 {
     public function __construct()
     {
-        //$CI = & get_instance();
         $validation =  \Config\Services::validation();
     }
 
@@ -36,8 +35,10 @@ class Users extends BaseController
      */
     public function addUSer(): void
     {
-        if($this->session('user_id') == NULL){ //checking if the user isn't already connected
-            $this->validation->setRules([
+        $arrErrors = array();
+        $validation =  \Config\Services::validation();
+        if($this->session->get('user_id') == NULL){ //checking if the user isn't already connected
+            $validation->setRules([
                 'user_email' => 
                 [
                     'label'  => 'e-mail',
@@ -62,10 +63,39 @@ class Users extends BaseController
                     ],
                 ],
             ]);
-        }
+            if(count($this->request->getPost())  > 0){ //checking if the form is submitted and has no errors
+                //checking user credentials
+                if($boolCanConnect){
+
+                }else{ // if it's not possible to connect the user
+                    $arrErrors[] = 'Connexion impossible';
+                }
+            }else{ //if the form has errors
+                $arrErrors = $validation->getErrors();
+            }
+        
+        $arrAttributesUsernameInput = 
+        [
+            'name' => 'username',
+            'id' => 'username',
+            'class' => 'form-control form-control-lg',
+            //'value' => ,
+            'type' => 'text',
+        ];
+        $arrAttributesLabel = 
+        [
+            'class' => 'form-label',
+        ];
         $this->_data['form_open'] = form_open("/login");
+        $this->_data['form_username'] = form_input($arrAttributesUsernameInput);
         $this->_data['form_close'] = form_close();
+        $this->_data['arrErrors'] = $arrErrors;
+        $this->_data['title'] = "Create an account";
         $this->display('user/register.tpl'); //redirecting to the template
+        }else{
+            $this->_data['title'] = "You're already connected";
+            $this->display('errors/alreadyconnected.tpl');
+        }
     }
 
     /**
@@ -75,6 +105,7 @@ class Users extends BaseController
     {
         # code...
         //redirige vers la fiche utilisateur
+        $this->_data['title'] = "My account";
         $this->display('user/account.tpl');
     }
 
@@ -111,6 +142,7 @@ class Users extends BaseController
         $this->_data['form_submit' ]= form_submit("submit", "Login", "class='btn btn-purple btn-block btn-lg text-body'");
         $this->_data['form_close'] = form_close();
         //redirige vers page de connexion
+        $this->_data['title'] = "Login";
         $this->display('user/login.tpl');
         //Ou home si connexion réussie
         //$this->display('home/home.tpl');
@@ -123,6 +155,7 @@ class Users extends BaseController
     {
         # code...
         //On redirige vers home quand déconnecté
+        $this->_data['title'] = "Home";
         $this->display('home/home.tpl');
     }
 }
