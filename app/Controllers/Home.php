@@ -21,7 +21,7 @@ class Home extends BaseController
         $this->display('layout/layout.tpl');
     }
     /*On accède à la page RGPD*/
-    public function rgpd(): void
+    public function gdpr(): void
     {
         $this->_data['title'] = "GDPR - ";
         $this->display('reglementation/rgpd.tpl');

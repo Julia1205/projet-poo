@@ -53,7 +53,7 @@ $routes->get('/account', 'Users::updateUser');
 
 /*La partie des pages de règlementation*/
 /*-- L'accès à la page de la RGPD --*/
-$routes->get('/rgpd', 'Home::rgpd');
+$routes->get('/gdpr', 'Home::gdpr');
 /*-- L'accès à la page des Conditions Générales d'Utilisation --*/
 $routes->get('/gcu', 'Home::gcu');
 
