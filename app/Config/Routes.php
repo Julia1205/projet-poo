@@ -52,6 +52,13 @@ $routes->get('/register', 'Users::addUser');
 $routes->get('/account', 'Users::updateUser');
 $routes->get('/addCocktail', 'Cocktails::addCocktailView');
 
+/*La partie des pages de règlementation*/
+/*-- L'accès à la page de la RGPD --*/
+$routes->get('/gdpr', 'Home::gdpr');
+/*-- L'accès à la page des Conditions Générales d'Utilisation --*/
+$routes->get('/gcu', 'Home::gcu');
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

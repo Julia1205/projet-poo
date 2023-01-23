@@ -44,22 +44,25 @@
             </div>
         </div>
     </section>
-    {*La partie pour lister les cocktails créés par l'utilisateur*}
-    <div class="justify-content-evenly row">
-        {*les cartes pour 6 cocktails*}
-        <div class="col-4 d-flex justify-content-center mb-5">
-            <div class="card text-center p-2" style="width: 350px">
-                <img src="{base_url()}/assets/pictures/cocktail.jpg" class="object-fit-fill"  alt="the picture name">
-                <div class="card-body">
-                    {*Le nom du cocktail*}
-                    <h5 class="card-title">Nom du cocktail</h5>
-                    {*On indique si il y a de l'alcool ou non*}
-                    <p class="card-text">Avec alcool</p>
-                    <p class="card-text">Sans alcool</p>
-                    {*On permet d'aller sur la fiche du cocktail*}
-                    <a href="#" class="btn btn-purple">Open cocktail</a>
+    <section class="card border-purple mt-4">
+        <h2 class="text-uppercase text-center my-5">My cocktails</h2>
+        {*La partie pour lister les cocktails créés par l'utilisateur*}
+        <div class="justify-content-evenly row">
+            {*la carte cocktail*}
+            <div class="col-4 d-flex justify-content-center mb-5">
+                <div class="card text-center p-2" style="width: 350px">
+                    <img src="{base_url()}/assets/pictures/cocktail.jpg" class="object-fit-fill"  alt="the picture name">
+                    <div class="card-body">
+                        {*Le nom du cocktail*}
+                        <h5 class="card-title">Nom du cocktail</h5>
+                        {*On indique si il y a de l'alcool ou non*}
+                        <p class="card-text">Avec alcool</p>
+                        <p class="card-text">Sans alcool</p>
+                        {*On permet d'aller sur la fiche du cocktail*}
+                        <a href="#" class="btn btn-purple">Open cocktail</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 {/block}
