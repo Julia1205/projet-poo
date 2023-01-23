@@ -52,7 +52,7 @@ class Users extends BaseController
     {
         $arrErrors = array();
         $validation =  \Config\Services::validation();
-        if($this->session->get('user_id') == NULL){ //checking if the user isn't already connected
+        if($this->_session->get('user_id') == NULL){ //checking if the user isn't already connected
             $validation->setRules([
                 'user_email' => 
                 [
@@ -130,6 +130,8 @@ class Users extends BaseController
      */
     public function connectUser(): void
     {
+        
+        var_dump($this->_session->get('user_id'));
         # code...
         $arrAttributesUsernameInput = 
         [
