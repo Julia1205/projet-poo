@@ -111,8 +111,24 @@ class Auth extends BaseController
             return redirect()->to('/');
         }
 
-        $this->_data['array'] = "oui";
         $this->_data['title'] = "title";
         return  $this->display('user/login.tpl');
+    }
+
+    public function updateInfoUser()
+    {
+        $userModel = new UserModel();
+        $loggedInUserId = session()->get('loggedUser');
+        $userInfo = $userModel->find($loggedInUserId);
+
+        $data = [
+            'title' => "Dashboard",
+            'userInfo' => $userInfo,
+            'name' => $userInfo['user_pseudo']
+        ];
+
+        $this->_data['array'] = $data;
+        return  $this->display('user/account.tpl');
+
     }
 }
