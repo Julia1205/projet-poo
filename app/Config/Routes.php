@@ -50,6 +50,7 @@ $routes->get('/logout', 'Users::disconnectUser');
 $routes->get('/register', 'Users::addUser');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
 $routes->get('/account', 'Users::updateUser');
+$routes->get('/addCocktail', 'Cocktails::addCocktailView');
 
 /*
  * --------------------------------------------------------------------
