@@ -4,7 +4,16 @@
 {*On ajoute du contenu à la page*}
 {block name="content"}
     {if isset($array)}
-    {var_dump($array)}
+        {var_dump($array)}
+    {/if}
+    {if !empty(session('success'))}
+        <div class="alert alert-success">
+            {session('success')}
+        </div>
+    {else if !empty(session('fail'))}
+        <div class="alert alert-danger">
+            {session('fail')}
+        </div>
     {/if}
     <section class="mask d-flex align-items-center h-100">
         <div class="container h-100">

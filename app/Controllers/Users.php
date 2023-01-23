@@ -36,90 +36,17 @@ class Users extends BaseController
 
     public function registerUser(): void
     {
-        $validated = $this->validate([
-            'name' => 'required',
-            'email' => 'required|valid_email',
-            'password' => 'required|min_length[5]|max_length[10]',
-            'password_conf' => 'required|min_length[5]|max_length[10]|matches[password]'
-        ])
         
-        if(!$validated){
-            return view('/register', ['validation' => $this->validator]);
-        }
         
     }
-    public function addUSer(): void
-    {
-        $arrErrors = array();
-        $validation =  \Config\Services::validation();
-        if($this->_session->get('user_id') == NULL){ //checking if the user isn't already connected
-            $validation->setRules([
-                'user_email' => 
-                [
-                    'label'  => 'e-mail',
-                    //adding the validation rules
-                    'rules'  => 'required|valid_email|is_unique[user.user_mail]',
-                    //adding the error messages for each validation rule
-                    'errors' => [
-                        'required' => 'Le {field} est obligatoire',
-                        'valid_email' => 'Le {field} doit être au format valide',
-                        'is_unique' => 'Merci d\'utiliser une autre adresse mail',
-                    ],
-                ],
-                'user_password' => 
-                [
-                    'label'  => 'mot de passe',
-                    'rules'  => 'required|max_length[30]|min_length[5]',
-                    'errors' => [
-                        //Attribution des messages d'erreurs individualisés pour chaque condition
-                        'max_length' => 'Le {field} doit être de maximum trente caractères',
-                        'min_length' => 'Le {field} doit être de minimum de cinq caractères',
-                        'required' => 'Le {field} doit être rempli',
-                    ],
-                ],
-            ]);
-            if(count($this->request->getPost())  > 0){ //checking if the form is submitted and has no errors
-                //checking user credentials
-                if($boolCanConnect){
-                    
-                }else{ // if it's not possible to connect the user
-                    $arrErrors[] = 'Connexion impossible';
-                }
-            }else{ //if the form has errors
-                $arrErrors = $validation->getErrors();
-            }
-
-        
-        $arrAttributesUsernameInput = 
-        [
-            'name' => 'username',
-            'id' => 'username',
-            'class' => 'form-control form-control-lg',
-            //'value' => ,
-            'type' => 'text',
-        ];
-        $arrAttributesLabel = 
-        [
-            'class' => 'form-label',
-        ];
-        $this->_data['form_open'] = form_open("/login");
-        $this->_data['form_username'] = form_input($arrAttributesUsernameInput);
-        $this->_data['form_close'] = form_close();
-        $this->_data['arrErrors'] = $arrErrors;
-        $this->_data['title'] = "Create an account";
-        $this->display('user/register.tpl'); //redirecting to the template
-        }else{
-            $this->_data['title'] = "You're already connected";
-            $this->display('errors/alreadyconnected.tpl');
-        }
-    }
+    
 
     /**
      *
      */
     public function updateUser(): void
     {
-        # code...
+        
         //redirige vers la fiche utilisateur
         $this->_data['title'] = "My account";
         $this->display('user/account.tpl');
