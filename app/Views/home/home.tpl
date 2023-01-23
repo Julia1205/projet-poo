@@ -14,7 +14,7 @@
                     <p class="card-text">Avec alcool</p>
                     <p class="card-text">Sans alcool</p>
                     {*On permet d'aller sur la fiche du cocktail*}
-                    <a href="#" class="btn btn-purple">Go somewhere</a>
+                    <a href="#" class="btn btn-purple">Open cocktail</a>
                 </div>
             </div>
         </div>
