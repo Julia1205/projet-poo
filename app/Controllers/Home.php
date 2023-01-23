@@ -8,11 +8,15 @@ class Home extends BaseController
 {
     public function index()
     {
+        $arrObjCocktail = array();
         $cocktail_model = new Cocktails_model;
         for ($i=0; $i < 6; $i++) { //fetching 4 random cocktails
             $objCocktail = $cocktail_model->getCocktailByID(rand(1, 400));
+            $arrObjCocktail[] = $objCocktail;
         }
-        $this->_data['title'] = "Cocktail point";
+        //var_dump($arrObjCocktail);
+        $this->_data['allCocktail'] = $arrObjCocktail;
+        $this->_data['title'] = "Cocktail poiecceecent";
         $this->display('home/home.tpl');
     }
     public function layout()
