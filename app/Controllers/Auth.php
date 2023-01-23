@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Libraries\Hash;
+use App\Models\UserModel;
 
 class Auth extends BaseController
 {
@@ -15,10 +16,13 @@ class Auth extends BaseController
 
     public function index()
     {
-        $this->_data['title'] = "S'inscrire";
+        $this->_data['title'] = "Sign up ";
         $this->display('user/register.tpl');
     }
     
+    /**
+     * Save new user to database
+     */
     public function registerUser()
     {
         $validated = $this->validate([
@@ -55,7 +59,7 @@ class Auth extends BaseController
         ]);
         
         if (!$validated) {
-            $this->_data['title'] = "S'inscrire";
+            $this->_data['title'] = "Sign up ";
             $this->_data['validation'] = $this->validator;
            return  $this->display('user/register.tpl');
         }
@@ -78,14 +82,37 @@ class Auth extends BaseController
         $query = $userModel->insert($data);
 
         if ($query){
-            return  $this->display('home/home.tpl');
+            return redirect()->back()->with('success', 'Your account has been create !');
+/*             return  $this->display('home/home.tpl');
+ */        }else{
+            $this->_data['title'] = "Sign up ";
+            return redirect()->back()->with('fail', 'Saving User failed');
+        }
+    }
+
+    public function loginUser(){
+        $username = $this->request->getPost('name');
+        $password = $this->request->getPost('password');
+
+        $userModel = new UserModel();
+
+        $userInfo = $userModel->where('user_pseudo', $username)->first();
+
+        $checkPassword = Hash::check($password, $userInfo['user_pwd']);
+
+        /* $array=password_verify($password, $userInfo['user_pwd']); */
+
+        if(!$checkPassword){
+            session()->setFlashdata('fail', 'Incorrect username or password');
+            return redirect()->to('/login');
         }else{
-            return $this->display('user/register.tpl');
+            $userId = $userInfo['user_id'];
+            session()->set('loggedUser', $userId);
+            return redirect()->to('/');
         }
 
-        $array = [$name, $mail, $password, $password_confirm];
-        $this->_data['title'] = "S'inscrire";
-        $this->_data['array'] = $array;
-        return  $this->display('user/register.tpl');
+        $this->_data['array'] = "oui";
+        $this->_data['title'] = "title";
+        return  $this->display('user/login.tpl');
     }
 }
