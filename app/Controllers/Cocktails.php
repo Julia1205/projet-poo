@@ -103,7 +103,7 @@ class Cocktails extends BaseController
 					$arrCocktailToSave["cocktail_user_id"] = null;
 					$arrCocktailToSave["cockail_updated_user_id"] = null;
 				}else{ //if it's from a user
-					if(isset($this->_session->get('user_id')) && $this->_session->get('user_id') !== null){
+					if($this->_session->get('user_id') !== null && $this->_session->get('user_id') !== null){
 						$arrCocktailToSave["cocktail_user_id"] = $this->_session->get('user_id');
 						$arrCocktailToSave["cockail_updated_user_id"] = $this->_session->get('user_id');
 						$arrCocktailToSave["cocktail_is_moderated"] = 0;
@@ -140,5 +140,31 @@ class Cocktails extends BaseController
 	{
 		//formatting the object to fit the addCocktail
 		$this->addCocktail();
+	}
+
+	public function addCocktailView(Type $var = null)
+	{
+		$arrAttributesNameInput = 
+		[
+			'name' => 'name',
+			'id' => 'name',
+			'class' => '',
+			'type' => 'text',
+		];
+		$arrAttributesReceipe = 
+		[
+			'name' => 'receipe',
+			'id' => 'receipe',
+			'class' => '',
+			'type' => 'textarea',
+		];
+		$glass = new Glass_model;
+		
+		$this->_data['form_open'] = form_open("/addCocktail");
+		$this->_data['input_name'] = form_input($arrAttributesNameInput);
+		$this->_data['input_receipe'] = form_input($arrAttributesReceipe);
+		$this->_data['form_close'] = form_close();
+		$this->_data['title'] = 'Ajouter un cocktail';
+		$this->display('addCocktail.tpl');
 	}
  }
