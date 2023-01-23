@@ -17,7 +17,6 @@ class Home extends BaseController
         //var_dump($arrObjCocktail);
         $this->_data['allCocktail'] = $arrObjCocktail;
         $this->_data['title'] = "Cocktail poiecceecent";
-
         $this->display('home/home.tpl');
     }
 
@@ -26,6 +25,7 @@ class Home extends BaseController
         $this->_data['title'] = "Layout - ";
         $this->display('layout/layout.tpl');
     }
+
     public function gdpr(): void
     {
         $this->_data['title'] = "GDPR - ";
