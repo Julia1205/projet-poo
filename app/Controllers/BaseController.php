@@ -30,7 +30,7 @@ abstract class BaseController extends Controller
      */
     protected $request;
     protected $_data = [];
-    protected $session = [];
+    protected $_session = [];
 
     /**
      * An array of helpers to be loaded automatically upon
@@ -48,7 +48,8 @@ abstract class BaseController extends Controller
     {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
-        $this->session = session();
+        $this->_session = \Config\Services::session();
+       
 
         // Preload any models, libraries, etc, here.
         require_once(APPPATH.'smarty/libs/Smarty.class.php');

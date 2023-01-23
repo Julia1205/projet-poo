@@ -103,9 +103,9 @@ class Cocktails extends BaseController
 					$arrCocktailToSave["cocktail_user_id"] = null;
 					$arrCocktailToSave["cockail_updated_user_id"] = null;
 				}else{ //if it's from a user
-					if(isset($session->userId) && $session->userId !== null){
-						$arrCocktailToSave["cocktail_user_id"] = $session->userId;
-						$arrCocktailToSave["cockail_updated_user_id"] = $session->userId;
+					if(isset($this->_session->get('user_id')) && $this->_session->get('user_id') !== null){
+						$arrCocktailToSave["cocktail_user_id"] = $this->_session->get('user_id');
+						$arrCocktailToSave["cockail_updated_user_id"] = $this->_session->get('user_id');
 						$arrCocktailToSave["cocktail_is_moderated"] = 0;
 					}else{
 						$arrErrors = "Merci de vous connecter pour ajouter un nouveau cocktail";
