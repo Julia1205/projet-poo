@@ -1,7 +1,6 @@
 {*On extend le layout*}
 {extends file="layout/layout.tpl" }
 {*On modifie le title de la page*}
-{block name="title"}Login{/block}
 {*On ajoute du contenu à la page*}
 {block name="content"}
     <section class="mask d-flex align-items-center h-100 mb-5">
@@ -11,20 +10,20 @@
                     <div class="card border-purple" style="border-radius: 15px;">
                         <div class="card-body p-5">
                             <h2 class="text-uppercase text-center mb-5">Log in</h2>
-                            <form>
+                            {$form_open}
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example1cg">Your Username</label>
+                                    {$form_username}
+                                    {$label_username}
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
-                                    <label class="form-label" for="form3Example4cg">Your Password</label>
+                                    {$form_pwd}
+                                    {$label_password}
                                 </div>
                                 <div class="d-flex justify-content-center">
-                                    <button type="button" class="btn btn-purple btn-block btn-lg text-body">Login</button>
+                                    {$form_submit}
                                 </div>
                                 <p class="text-center text-muted mt-5 mb-0">Have any account ? <a href="{base_url('/register')}" class="fw-bold text-body"><u>Register here</u></a></p>
-                            </form>
+                            {$form_close}
 
                         </div>
                     </div>

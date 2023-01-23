@@ -1,7 +1,6 @@
 {*On extend le layout*}
 {extends file="layout/layout.tpl" }
 {*On modifie le title de la page*}
-{block name="title"}Register{/block}
 {*On ajoute du contenu à la page*}
 {block name="content"}
     <section class="mask d-flex align-items-center h-100">

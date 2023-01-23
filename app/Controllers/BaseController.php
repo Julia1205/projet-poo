@@ -23,7 +23,6 @@ use Smarty;
 abstract class BaseController extends Controller
 {
     protected $_smarty;
-
     /**
      * Instance of the main Request object.
      *
@@ -31,6 +30,7 @@ abstract class BaseController extends Controller
      */
     protected $request;
     protected $_data = [];
+    protected $session = [];
 
     /**
      * An array of helpers to be loaded automatically upon
@@ -39,7 +39,7 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = [];
+    protected $helpers = ['form'];
 
     /**
      * Constructor.
@@ -48,6 +48,7 @@ abstract class BaseController extends Controller
     {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
+        $this->session = session();
 
         // Preload any models, libraries, etc, here.
         require_once(APPPATH.'smarty/libs/Smarty.class.php');
