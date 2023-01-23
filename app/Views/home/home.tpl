@@ -1,5 +1,4 @@
 {extends file="layout/layout.tpl"}
-{*On modifie le title*}
 {*On modifie le contenu*}
 {block name="content"}
     <div class="justify-content-evenly row d-flex flex-wrap">

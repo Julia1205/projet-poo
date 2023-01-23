@@ -144,14 +144,14 @@ class Cocktails extends BaseController
 
 	public function addCocktailView(Type $var = null)
 	{
-		$arrAttributesNameInput = 
+		$arrAttributesNameInput =
 		[
 			'name' => 'name',
 			'id' => 'name',
 			'class' => '',
 			'type' => 'text',
 		];
-		$arrAttributesReceipe = 
+		$arrAttributesReceipe =
 		[
 			'name' => 'receipe',
 			'id' => 'receipe',
@@ -159,7 +159,7 @@ class Cocktails extends BaseController
 			'type' => 'textarea',
 		];
 		$glass = new Glass_model;
-		
+
 		$this->_data['form_open'] = form_open("/addCocktail");
 		$this->_data['input_name'] = form_input($arrAttributesNameInput);
 		$this->_data['input_receipe'] = form_input($arrAttributesReceipe);
@@ -167,4 +167,36 @@ class Cocktails extends BaseController
 		$this->_data['title'] = 'Ajouter un cocktail';
 		$this->display('addCocktail.tpl');
 	}
+
+    /**
+     *
+     */
+    final public function cocktailAdd(): void {
+        $this->_data['title'] = 'New cocktail - ';
+        $this->display('cocktail/add.tpl');
+    }
+
+    /**
+     * @param Int $intCocktailId
+     */
+    final public function cocktailView(Int $intCocktailId): void {
+        $this->_data['title'] = 'View cocktail - ';
+        $this->display('cocktail/view.tpl');
+    }
+
+    /**
+     * @param Int $intCocktailId
+     */
+    final public function cocktailUpdate(Int $intCocktailId): void {
+        $this->_data['title'] = 'Update cocktail - ';
+        $this->display('cocktail/update.tpl');
+    }
+
+    /**
+     * @param Int $intCocktailId
+     */
+    final public function cocktailDelete(Int $intCocktailId): void {
+        $this->_data['title'] = 'Delete cocktail - ';
+        $this->display('cocktail/delete.tpl');
+    }
  }
