@@ -155,7 +155,7 @@ class Users extends BaseController
     {
         # code...
         //On redirige vers home quand déconnecté
-        $this->_data['title'] = "Home";
+        $this->_data['title'] = "ESSAI";
         $this->display('home/home.tpl');
     }
 }
