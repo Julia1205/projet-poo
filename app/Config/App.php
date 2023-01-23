@@ -25,12 +25,13 @@ class App extends BaseConfig
      * @var string
      */
 
-    //public $baseURL = 'http://localhost/projet-poo1/public';
-    //public $baseURL = 'http://projet-poo1:8888/'; 
-    //FABIAN
 
     //public $baseURL = 'http://localhost/projet-poo1/public';
-    public $baseURL = 'http://projet-poo:8890/';
+    //public $baseURL = 'http://projet-poo:8890/';
+    //FABIAN 
+    
+    //public $baseURL = 'http://localhost/projet-poo1/public';
+    public $baseURL = 'http://projet-poo1:8888/';
     //THOMAS
 
 

@@ -51,6 +51,8 @@ $routes->get('/register', 'Auth::index');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
 $routes->get('/account', 'Users::updateUser');
 
+$routes->get('/registerUser', 'Auth::index');
+$routes->post('/registerUser', 'Auth::registerUser');
 $routes->get('/addCocktail', 'Cocktails::addCocktailView');
 
 /*La partie des pages de règlementation*/
@@ -58,11 +60,6 @@ $routes->get('/addCocktail', 'Cocktails::addCocktailView');
 $routes->get('/gdpr', 'Home::gdpr');
 /*-- L'accès à la page des Conditions Générales d'Utilisation --*/
 $routes->get('/gcu', 'Home::gcu');
-
-$routes->get('/registerUser', 'Auth::index');
-$routes->post('/registerUser', 'Auth::registerUser');
-
-
 /*
  * --------------------------------------------------------------------
  * Additional Routing
