@@ -51,6 +51,13 @@ $routes->get('/register', 'Users::addUser');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
 $routes->get('/account', 'Users::updateUser');
 
+/*La partie des pages de règlementation*/
+/*-- L'accès à la page de la RGPD --*/
+$routes->get('/rgpd', 'Home:rgpd');
+/*-- L'accès à la page des Conditions Générales d'Utilisation --*/
+$routes->get('/gcu', 'Home:gcu');
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
