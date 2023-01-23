@@ -1,5 +1,8 @@
 {extends file="layout/layout.tpl"}
 {*On modifie le contenu*}
+{block name='js_top' append}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{/block}
 {block name="content"}
     {$form_open}
         <section class="mask d-flex align-items-center h-100 mb-5">
@@ -34,8 +37,15 @@
                                 </div>
                                 {*On fait une boucle pour les ingrédients*}
                                     {for $foo = 1 to 15}
-                                                {$input_ingredient.$foo}
-                                                {$input_quantity.$foo}
+                                        <div class='card border-purple m-2 p-2' id='{$foo}'>
+                                            {$input_ingredient.$foo}
+                                            {$label_ingredient_name}<br>
+                                            {$input_quantity.$foo}<br>
+                                            {$label_quantity_name}
+                                        <div>
+                                        <span class='btn btn-purple add{$foo}' id='add{$foo}'> add more ingredient</span>
+                                        </div>
+                                        </div>
                                     {/for}
                                 
                                 {*La recette du nouveau cocktail*}
@@ -45,7 +55,6 @@
                                 </div>
                                 {*Le btn pour créer le nouveau cocktail*}
                                 <div class="d-flex justify-content-center">
-                                    <button type="button" class="btn btn-purple btn-block btn-lg text-body">Create new cocktail</button>
                                     {$form_submit}
                                 </div>
                             </div>
@@ -55,4 +64,7 @@
             </div>
         </section>
     {$form_close}
+{/block}
+{block name='js_bot' append}
+        <script src="{base_url('assets/js/addCocktail.js')}"></script>
 {/block}

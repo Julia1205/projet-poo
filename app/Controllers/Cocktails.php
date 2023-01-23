@@ -254,6 +254,8 @@ class Cocktails extends BaseController
 			];
 			$this->_data['input_quantity'][$i] = form_input($arrIngredient_quantity);
 		}
+		$this->_data['label_ingredient_name'] = form_label('Ingredient name', 'Ingredient-name', $arrLabelAttributes);
+		$this->_data['label_quantity_name'] = form_label('Ingredient quantity', 'Ingredient-name', $arrLabelAttributes);
 		$this->_data['form_submit' ]= form_submit("submit", "Create new cocktail", "class='btn btn-purple btn-block btn-lg text-body'");
 		$this->_data['form_close'] = form_close();
         $this->_data['title'] = 'New cocktail - ';
