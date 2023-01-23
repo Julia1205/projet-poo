@@ -33,6 +33,21 @@ class Users extends BaseController
     /**
      *
      */
+
+    public function registerUser(): void
+    {
+        $validated = $this->validate([
+            'name' => 'required',
+            'email' => 'required|valid_email',
+            'password' => 'required|min_length[5]|max_length[10]',
+            'password_conf' => 'required|min_length[5]|max_length[10]|matches[password]'
+        ])
+        
+        if(!$validated){
+            return view('/register', ['validation' => $this->validator]);
+        }
+        
+    }
     public function addUSer(): void
     {
         $arrErrors = array();
@@ -66,13 +81,14 @@ class Users extends BaseController
             if(count($this->request->getPost())  > 0){ //checking if the form is submitted and has no errors
                 //checking user credentials
                 if($boolCanConnect){
-
+                    
                 }else{ // if it's not possible to connect the user
                     $arrErrors[] = 'Connexion impossible';
                 }
             }else{ //if the form has errors
                 $arrErrors = $validation->getErrors();
             }
+
         
         $arrAttributesUsernameInput = 
         [
