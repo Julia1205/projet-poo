@@ -60,6 +60,8 @@ $routes->get('/addCocktail', 'Cocktails::addCocktailView');
 $routes->get('/gdpr', 'Home::gdpr');
 /*-- L'accès à la page des Conditions Générales d'Utilisation --*/
 $routes->get('/gcu', 'Home::gcu');
+
+$routes->post('/login', 'Auth::loginUser');
 /*
  * --------------------------------------------------------------------
  * Additional Routing

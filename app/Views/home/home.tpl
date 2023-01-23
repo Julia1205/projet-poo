@@ -2,6 +2,11 @@
 {*On modifie le title*}
 {*On modifie le contenu*}
 {block name="content"}
+{if isset($registered)}
+    <div class="alert alert-success">
+        {$registered}
+    </div>
+{/if}
     <div class="justify-content-evenly row d-flex flex-wrap">
         {foreach from=$allCocktail key=cle item=item}
             <div class="col-4 d-flex justify-content-center mb-5">
