@@ -2,11 +2,13 @@
 {*On modifie le title*}
 {*On modifie le contenu*}
 {block name="content"}
-    <div class="justify-content-evenly row">
-        {*les cartes pour 6 cocktails*}
+    <div class="justify-content-evenly row d-flex flex-wrap">
+        {*la carte pour chaque cocktail*}
         <div class="col-4 d-flex justify-content-center mb-5">
             <div class="card text-center p-2" style="width: 350px">
+                {*L'Image du cocktail*}
                 <img src="{base_url()}/assets/pictures/cocktail.jpg" class="object-fit-fill"  alt="the picture name">
+                {*Les informations du cocktail*}
                 <div class="card-body">
                     {*Le nom du cocktail*}
                     <h5 class="card-title">Nom du cocktail</h5>
