@@ -27,12 +27,12 @@ class App extends BaseConfig
 
 
     //public $baseURL = 'http://localhost/projet-poo1/public';
-    //public $baseURL = 'http://projet-poo:8890/';
-    //FABIAN 
+    public $baseURL = 'http://projet-poo:8890/';
+    //THOMAS
     
     //public $baseURL = 'http://localhost/projet-poo1/public';
-    public $baseURL = 'http://projet-poo1:8888/';
-    //THOMAS
+    //public $baseURL = 'http://projet-poo1:8888/';
+    //FABIAN
 
 
     /**

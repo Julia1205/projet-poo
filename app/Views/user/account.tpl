@@ -4,6 +4,11 @@
 {block name="title"}My account{/block}
 {*On affiche le contenu de la page*}
 {block name="content"}
+{if isset($array)}
+Bonjour {$array['name']}
+{else}
+<p>ALED</p>
+{/if}
     <h1 class="text-uppercase text-underline text-center my-5">Manage my account</h1>
     {*La partie pour modifier les informations du compte*}
     <section class="mask d-flex align-items-center h-100">
@@ -15,7 +20,7 @@
                             <h2 class="text-uppercase text-center mb-5">Update informations</h2>
                             <form>
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
+                                    <input type="text" id="form3Example1cg" value='{$array['name']}' class="form-control form-control-lg" />
                                     <label class="form-label" for="form3Example1cg">My Username</label>
                                 </div>
                                 <div class="form-outline mb-4">
