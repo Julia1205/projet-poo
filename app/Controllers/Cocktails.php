@@ -68,7 +68,7 @@ class Cocktails extends BaseController
 		}
 		
 		foreach($arrList as $objCocktail){//running through the array of object to save it in DB
-			$this->addCocktail($objCocktail, 1);
+			$this->saveCocktail($objCocktail, 1);
 		}
     }
 
@@ -78,7 +78,7 @@ class Cocktails extends BaseController
 	 * ses ingredients et sa recette</p>
 	 * @param $objCocktail objet cocktail, $boolIsFromFetch booléen
 	 */
-	public function addCocktail($objCocktail, $boolIsFromFetch)
+	public function saveCocktail($objCocktail, $boolIsFromFetch)
 	{
 		if($objCocktail !== null){// if the index is not empty
 			if(is_object($objCocktail)){
@@ -136,13 +136,18 @@ class Cocktails extends BaseController
 	/**
 	 * @Brief Méthode de formattage du cocktail à sauvegarder
 	 */
-	public function saveCocktail()
+	public function formatCocktail()
 	{
 		//formatting the object to fit the addCocktail
-		$this->addCocktail();
+		//$this->saveCocktail();
+		var_dump($_POST);die;
+		if(count($this->request->getPost()) > 0){
+			var_dump($this->request->getPost());
+			//strAlcoholic
+		}
 	}
 
-	public function addCocktailView(Type $var = null)
+	public function addCocktail(Type $var = null)
 	{
 		$arrAttributesNameInput =
 		[
@@ -158,9 +163,9 @@ class Cocktails extends BaseController
 			'class' => '',
 			'type' => 'textarea',
 		];
-		$glass = new Glass_model;
 		$ingredient = new Ingredient_model;
 		$ingredients = $ingredient->findAll();
+		$glass = new Glass_model;
 		$glasses = $glass->findAll();
 		$arrGlassesOptions = array();
 		foreach ($glasses as $objGlass) {
@@ -174,22 +179,26 @@ class Cocktails extends BaseController
 		$arrIngredient_quantity =
 		[
 			'class' => '',
-			'id' => 'qty',
-			'name' => 'qty',
+			'name' => 'qty[]',
 		];
 		$arrLabelAttributes =
 		[
-			'class' => '',
+			'class' => 'form-label',
 		];
 		//var_dump($ingredients);
-		$this->_data['form_open'] = form_open("/addCocktail");
+		$this->_data['form_open'] = form_open("formatCocktail");
 		$this->_data['input_name'] = form_input($arrAttributesNameInput);
 		$this->_data['label_name'] = form_label('Name', 'name', $arrLabelAttributes);
 		$this->_data['input_receipe'] = form_input($arrAttributesReceipe);
 		$this->_data['label_receipe'] = form_label('Receipe', 'receipe', $arrLabelAttributes);
 		$this->_data['input_glass'] = form_dropdown('glass', $arrGlassesOptions);
-		$this->_data['input_ingredients'] = form_dropdown('ingredients', $arrIngredientsOptions);
-		$this->_data['input_quantity'] = form_input($arrIngredient_quantity);
+		
+		for ($i=1; $i <= 15; $i++) { 
+			$this->_data['input_ingredient'][$i] = form_dropdown('ingredient['.$i.']', $arrIngredientsOptions, "",'class=form-select');
+			$this->_data['input_quantity'][$i] = form_input($arrIngredient_quantity);
+		}
+
+		$this->_data['form_submit' ]= form_submit("submit", "Save", "class='btn btn-purple btn-block btn-lg text-body'");
 		$this->_data['form_close'] = form_close();
 		$this->_data['title'] = 'Ajouter un cocktail';
 		$this->display('addCocktail.tpl');
@@ -199,6 +208,54 @@ class Cocktails extends BaseController
      *
      */
     final public function cocktailAdd(): void {
+		$arrLabelAttributes =
+		[
+			'class' => 'form-label',
+		];
+		$arrLabelCheckboxAttributes = [
+			'class' => '',
+		];
+		$arrAttributesNameInput =
+		[
+			'name' => 'name',
+			'id' => 'name',
+			'class' => 'form-control form-control-lg',
+			'type' => 'text',
+		];
+		$glass = new Glass_model;
+		$glasses = $glass->findAll();
+		$arrGlassesOptions = array();
+		$arrIngredientsOptions = array();
+		foreach ($glasses as $objGlass) {
+			$arrGlassesOptions[$objGlass->glass_id] = $objGlass->glass_name;
+		}
+		$ingredient = new Ingredient_model;
+		$ingredients = $ingredient->findAll();
+		$arrIngredientsOptions = array();
+		foreach ($ingredients as $objIngredient) {
+			$arrIngredientsOptions[$objIngredient->ingredient_id] = $objIngredient->ingredient_name;
+		}
+		//var_dump($arrIngredientsOptions);
+		$this->_data['form_open'] = form_open("formatCocktail");
+		$this->_data['input_name'] = form_input($arrAttributesNameInput);
+		$this->_data['label_name'] = form_label('Name', 'name', $arrLabelAttributes);
+		$this->_data['input_glass'] = form_dropdown('glass', $arrGlassesOptions, "", "class='form-select'");
+		$this->_data['label_glass'] = form_label('Glass name', 'glass', $arrLabelAttributes);
+		$this->_data['input_alcohol'] = form_radio('alcoholic', 1, "","class='form-check-input'");
+		$this->_data['label_alcohol'] = form_label('Cocktail without alcool', 'alcoholic', $arrLabelCheckboxAttributes);
+		$this->_data['input_nonalcohol'] = form_radio('alcoholic', 0, "","class='form-check-input'");
+		$this->_data['label_nonalcohol'] = form_label('Cocktail with alcool', 'alcoholic', $arrLabelCheckboxAttributes);
+		for ($i=1; $i <= 15; $i++) { 
+			$this->_data['input_ingredient'][$i] = form_dropdown('ingredient['.$i.']', $arrIngredientsOptions, "",'class=form-select');
+			$arrIngredient_quantity =
+			[
+				'class' => '',
+				'name' => 'qty['.$i.']',
+			];
+			$this->_data['input_quantity'][$i] = form_input($arrIngredient_quantity);
+		}
+		$this->_data['form_submit' ]= form_submit("submit", "Create new cocktail", "class='btn btn-purple btn-block btn-lg text-body'");
+		$this->_data['form_close'] = form_close();
         $this->_data['title'] = 'New cocktail - ';
         $this->display('cocktail/add.tpl');
     }
