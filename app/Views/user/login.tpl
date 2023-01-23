@@ -22,7 +22,7 @@
                                 <div class="d-flex justify-content-center">
                                     {$form_submit}
                                 </div>
-                                <p class="text-center text-muted mt-5 mb-0">Have any account ? <a href="{base_url('/register')}" class="fw-bold text-body"><u>Register here</u></a></p>
+                                <p class="text-center text-muted mt-5 mb-0">Haven't any account ? <a href="{base_url('/register')}" class="fw-bold text-body"><u>Register here</u></a></p>
                             {$form_close}
 
                         </div>
