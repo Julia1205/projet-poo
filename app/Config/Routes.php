@@ -48,11 +48,12 @@ $routes->get('/login', 'Users::connectUser');
 $routes->get('/logout', 'Users::disconnectUser');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
 $routes->get('/register', 'Auth::index');
+$routes->get('/registerUser', 'Auth::index');
+$routes->post('/registerUser', 'Auth::registerUser');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
 $routes->get('/account', 'Users::updateUser');
 
-$routes->get('/registerUser', 'Auth::index');
-$routes->post('/registerUser', 'Auth::registerUser');
+/*A SUPPRIMER*/
 $routes->get('/addCocktail', 'Cocktails::addCocktailView');
 
 /*La partie des pages de règlementation*/
@@ -60,6 +61,17 @@ $routes->get('/addCocktail', 'Cocktails::addCocktailView');
 $routes->get('/gdpr', 'Home::gdpr');
 /*-- L'accès à la page des Conditions Générales d'Utilisation --*/
 $routes->get('/gcu', 'Home::gcu');
+
+/*La partie des cocktails (ajout, lecture, modification, suppression*/
+/*-- L'accès à la page d'ajout de cocktail --*/
+$routes->get('/cocktail/add', 'Cocktails::cocktailAdd');
+/*-- L'accès à la page pour consulter un cocktail --*/
+$routes->get('/cocktail/view/(:num)', 'Cocktails::cocktailView/$1');
+/*-- L'accès à la page de modification de cocktail --*/
+$routes->get('/cocktail/update/(:num)', 'Cocktails::cocktailUpdate/$1');
+/*-- L'accès à la page de suppression de cocktail --*/
+$routes->get('/cocktail/delete/(:num)', 'Cocktails::cocktailDelete/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
