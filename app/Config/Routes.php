@@ -47,9 +47,11 @@ $routes->get('/login', 'Users::connectUser');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
 $routes->get('/logout', 'Users::disconnectUser');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
-$routes->get('/register', 'Users::addUser');
+$routes->get('/register', 'Auth::index');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
 $routes->get('/account', 'Users::updateUser');
+$routes->get('/registerUser', 'Auth::index');
+$routes->post('/registerUser', 'Auth::registerUser');
 
 /*
  * --------------------------------------------------------------------
