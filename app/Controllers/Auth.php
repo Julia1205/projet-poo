@@ -142,31 +142,6 @@ class Auth extends BaseController
                     'valid_email' => 'Your mail need to be valid',
                 ]
             ],
-            'old_password' => [
-                'rules' => 'required|min_length[5]|max_length[10]',
-                'errors' => [
-                    'required' => 'A password is required',
-                    'min_length' => 'Your password must be 5 charactars long',
-                    'max_length' => 'Your password must be less than 10 charactars long'
-                ],
-            ],
-            'new_password' => [
-                'rules' => 'required|min_length[5]|max_length[10]',
-                'errors' => [
-                    'required' => 'A password is required',
-                    'min_length' => 'Your password must be 5 charactars long',
-                    'max_length' => 'Your password must be less than 10 charactars long'
-                ],
-            ],
-            'confirm_new_password' => [
-                'rules' => 'required|min_length[5]|max_length[10]|matches[new_password]',
-                'errors' => [
-                    'required' => 'A password is required',
-                    'min_length' => 'Your password must be 5 charactars long',
-                    'max_length' => 'Your password must be less than 10 charactars long',
-                    'matches' => 'Your confirmation password should match with your password'
-                ],
-            ]
         ]);
         
         // If it's not validate, we are coming back to the account page without post informations
@@ -182,6 +157,11 @@ class Auth extends BaseController
         $mail = $this->request->getPost('mail');
         $oldPassword = $this->request->getPost('old_password');
         $newPassword = $this->request->getPost('new_password');
+
+        $newUserData = [
+            'user_pseudo' => $username,
+            'user_mail' => $mail
+        ];
         
         // Verification if password change is entered and if old password field is similar to pwd in db
         if (!empty($oldPassword) && !empty($newPassword)){
@@ -195,7 +175,7 @@ class Auth extends BaseController
                 session()->setFlashdata('pwdError', "Your old password do not match with the password you've entered");
             }
         }
-        $userModel->update($userInfo, $userData);
+        $userModel->update($userInfo, $newUserData);
         return redirect()->to('/account');
     }
 

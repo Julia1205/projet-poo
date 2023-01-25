@@ -4,15 +4,11 @@
 {block name="title"}My account{/block}
 {*On affiche le contenu de la page*}
 {block name="content"}
-{if isset($array)}
-Bonjour {$array['user_pseudo']}
-{else}
-<p>ALED</p>
-{/if}
+
 {if isset($mesg)}
     {$mesg}
 {/if}
-    <h1 class="text-uppercase text-underline text-center my-5">Manage my account</h1>
+    <h1 class="text-uppercase text-underline text-center my-5">Manage {$array['user_pseudo']} account</h1>
     {*La partie pour modifier les informations du compte*}
     <section class="mask d-flex align-items-center h-100">
         <div class="container h-100">
