@@ -43,7 +43,7 @@ $routes->get('/fetch', 'Cocktails::fetchCocktails');
 /*-- L'accès à la page d'accueil --*/
 $routes->get('/', 'Home::index');
 /*-- L'accès à la page listant l'ensemble des cocktails --*/
-$routes->get('/cocktails', 'Home::cocktailsList');
+$routes->get('/cocktails/(:num)', 'Home::cocktailsList/$1');
 
 /*La partie de gestion des utilisateurs*/
 /*-- L'accès à la page de connexion pour l'utilisateur --*/
