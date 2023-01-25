@@ -16,7 +16,7 @@ class Home extends BaseController
         }
         //var_dump($arrObjCocktail);
         $this->_data['allCocktail'] = $arrObjCocktail;
-        $this->_data['title'] = "Cocktail poiecceecent";
+        $this->_data['title'] = "Cocktail point";
 
         $this->display('home/home.tpl');
     }
