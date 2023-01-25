@@ -35,15 +35,20 @@ class Home extends BaseController
         $this->_data['title'] = "GCU - ";
         $this->display('reglementation/gcu.tpl');
     }
+
+    /**
+     * @param Int $intPage
+     */
     public function cocktailsList(Int $intPage): void {
+        //On récupère la liste des cocktails à afficher
         $arrObjCocktail[] = array();
         $cocktail_model = new Cocktails_model;
         $arrObjCocktail = $cocktail_model->getCocktailByPage($intPage);
-        //$arrObjCocktail[] = $objCocktail;
-        //var_dump($arrObjCocktail);
+        $maxPage = $cocktail_model->getCocktailPageNumber();
+        //On récupère le nombre max de pages
         $this->_data['allCocktail'] = $arrObjCocktail;
         $this->_data['actualPage'] = $intPage;
-        $this->_data['maxPage'] = 12;
+        $this->_data['maxPage'] = $maxPage;
         $this->_data['title'] = "";
         $this->display('cocktail/list.tpl');
     }

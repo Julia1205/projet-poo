@@ -83,8 +83,16 @@ class Cocktails_model extends Model{
         $maxResults = 15;
         $offset = ($maxResults * ($intPage - 1)) + 1;
         //orderBy('cocktail_name', 'ASC')->limit(1, 1)->findAll();
-        $request = $this->orderBy('cocktail_name', 'ASC')->findAll($maxResults, $offset);
-        //var_dump($this->db->getLastQuery());die;
-        return $request;
+        return $this->orderBy('cocktail_name', 'ASC')->findAll($maxResults, $offset);
+    }
+
+    /**
+     * @return Int
+     */
+    public function getCocktailPageNumber(): Int {
+        $request = $this->countAllResults();
+        $maxPage = $request / 15;
+        $dotPos = strpos($maxPage, '.');
+        return (int)substr($maxPage, 0, $dotPos) + 1;
     }
 }
