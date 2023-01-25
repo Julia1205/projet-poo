@@ -23,12 +23,13 @@
 
 class Cocktails extends BaseController
 {
+	private $validation;
     /**
      * @brief Constructeur de la classe
      */
     public function __construct()
     {
-
+        $this->validation =  \Config\Services::validation();
     }
 
     /**
@@ -140,15 +141,55 @@ class Cocktails extends BaseController
 	{
 		//formatting the object to fit the addCocktail
 		//$this->saveCocktail();
-		var_dump($_POST);die;
+		var_dump($_POST);
 		if(count($this->request->getPost()) > 0){
-			var_dump($this->request->getPost());
-			//strAlcoholic
+		$arrIngredients = $this->request->getPost('ingredient');
+			foreach ($arrIngredients as $intIngredientkey => $intIngredientId) {
+				if($intIngredientId !== null && $intIngredientId !== '--'){
+					var_dump($intIngredientId);
+				}
+			}			//strAlcoholic
 		}
 	}
 
 	public function addCocktail(Type $var = null)
 	{
+		$this->validation->setRules(
+		[
+			'name' => 
+			[
+				'rules' => 'required|is_unique[cocktails.cocktail_name]',
+				'errors' => 
+					[
+					'required' => 'Il est obligatoire de nommer le cocktail',
+					'is_unique' => 'Ce cocktail existe déjà',
+					],
+			],
+			'glass' => 
+			[
+				'rules' => 'required',
+				'errors' => 
+				[
+					'required' => 'Il est obligatoire de sélectionner un verre',
+				],
+			],
+			'alcoholic' =>
+			[
+				'rules' => 'required',
+				'errors' => 
+				[
+					'required' => 'Il est obligatoire de sélectionner un verre',
+				],
+			],
+			'qty[1]' =>
+			[
+				'rules' => 'required',
+				'errors' => 
+				[
+					'required' => 'Il est obligatoire de sélectionner un verre',
+				],
+			]
+		]);
 		$arrAttributesNameInput =
 		[
 			'name' => 'name',
@@ -163,6 +204,8 @@ class Cocktails extends BaseController
 			'class' => '',
 			'type' => 'textarea',
 		];
+		$arrErrors = $this->validation->getErrors();
+		$this->_data['arrErrors'] = $arrErrors;
 		$ingredient = new Ingredient_model;
 		$ingredients = $ingredient->findAll();
 		$glass = new Glass_model;

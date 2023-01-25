@@ -4,6 +4,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {/block}
 {block name="content"}
+    <div class='errors'>
+        {*$arrErrors*}
+    </div>
     {$form_open}
         <section class="mask d-flex align-items-center h-100 mb-5">
             <div class="container h-100 mb-5">
