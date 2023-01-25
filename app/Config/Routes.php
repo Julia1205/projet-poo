@@ -52,7 +52,8 @@ $routes->get('/register', 'Auth::index');
 $routes->get('/registerUser', 'Auth::index');
 $routes->post('/registerUser', 'Auth::registerUser');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
-$routes->get('/account', 'Auth::updateInfoUser');
+$routes->get('/account', 'Users::myAccount');
+$routes->post('/account', 'Auth::updateInfoUser');
 
 
 /*A SUPPRIMER*/
