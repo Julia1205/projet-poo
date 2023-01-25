@@ -17,7 +17,6 @@ class Home extends BaseController
         //var_dump($arrObjCocktail);
         $this->_data['allCocktail'] = $arrObjCocktail;
         $this->_data['title'] = "Cocktail point";
-
         $this->display('home/home.tpl');
     }
 
@@ -36,7 +35,15 @@ class Home extends BaseController
         $this->_data['title'] = "GCU - ";
         $this->display('reglementation/gcu.tpl');
     }
-    public function cocktailsList(): void {
+    public function cocktailsList(Int $intPage): void {
+        $arrObjCocktail[] = array();
+        $cocktail_model = new Cocktails_model;
+        $arrObjCocktail = $cocktail_model->getCocktailByPage($intPage);
+        //$arrObjCocktail[] = $objCocktail;
+        //var_dump($arrObjCocktail);
+        $this->_data['allCocktail'] = $arrObjCocktail;
+        $this->_data['actualPage'] = $intPage;
+        $this->_data['maxPage'] = 12;
         $this->_data['title'] = "";
         $this->display('cocktail/list.tpl');
     }
