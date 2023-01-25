@@ -43,7 +43,7 @@ $routes->get('/fetch', 'Cocktails::fetchCocktails');
 /*-- L'accès à la page d'accueil --*/
 $routes->get('/', 'Home::index');
 /*-- L'accès à la page listant l'ensemble des cocktails --*/
-$routes->get('/cocktails', 'Home::cocktailsList');
+$routes->get('/cocktails/(:num)', 'Home::cocktailsList/$1');
 
 /*La partie de gestion des utilisateurs*/
 /*-- L'accès à la page de connexion pour l'utilisateur --*/
@@ -58,7 +58,6 @@ $routes->post('/registerUser', 'Auth::registerUser');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
 $routes->get('/account', 'Auth::updateInfoUser');
 
-$routes->get('/addCocktail', 'Cocktails::addCocktail');
 $routes->post('/formatCocktail', 'Cocktails::formatCocktail');
 
 /*La partie des pages de règlementation*/
@@ -70,6 +69,7 @@ $routes->get('/gcu', 'Home::gcu');
 /*La partie des cocktails (ajout, lecture, modification, suppression*/
 /*-- L'accès à la page d'ajout de cocktail --*/
 $routes->get('/cocktail/add', 'Cocktails::cocktailAdd');
+$routes->get('/addCocktail', 'Cocktails::addCocktail');
 /*-- L'accès à la page pour consulter un cocktail --*/
 $routes->get('/cocktail/view/(:num)', 'Cocktails::cocktailView/$1');
 /*-- L'accès à la page de modification de cocktail --*/
