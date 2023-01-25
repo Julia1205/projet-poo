@@ -1,11 +1,27 @@
 {extends file="layout/layout.tpl"}
 {*On modifie le contenu*}
 {block name="content"}
-{if isset($registered)}
-    <div class="alert alert-success">
-        {$registered}
+    {*On définit le numéro de la page précédente*}
+    {if $actualPage > 1}
+        {$previousPage = $actualPage - 1}
+    {else}
+        {$previousPage = 1}
+    {/if}
+    {*On définit le numéro de la page suivante*}
+    {if $actualPage < $maxPage}
+        {$nextPage = $actualPage + 1}
+    {else}
+        {$nextPage = $actualPage}
+    {/if}
+    {*Les btn de changement de page*}
+    <div class="row text-center align-middle align-items-center justify-content-center my-3">
+        {*Page précédente*}
+        <a href="{base_url('/cocktails/')}/{$previousPage}" class="btn btn-purple col-1"><</a>
+        {*Le numéro de page actuel sur le nbr de pages total*}
+        <div class="mx-2 col-2">Page {$actualPage} / {$maxPage}</div>
+        {*Page suivante*}
+        <a href="{base_url('/cocktails/')}/{$nextPage}" class="btn btn-purple col-1">></a>
     </div>
-{/if}
     <div class="justify-content-evenly row d-flex flex-wrap">
         {foreach from=$allCocktail key=cle item=item}
             <div class="col-4 d-flex justify-content-center mb-5">
@@ -31,5 +47,14 @@
                 </div>
             </div>
         {/foreach}
+    </div>
+    {*Les btn de changement de page*}
+    <div class="row text-center align-middle align-items-center justify-content-center my-3">
+        {*Page précédente*}
+        <a href="{base_url('/cocktails/')}/{$previousPage}" class="btn btn-purple col-1"><</a>
+        {*Le numéro de page actuel sur le nbr de pages total*}
+        <div class="mx-2 col-2">Page {$actualPage} / {$maxPage}</div>
+        {*Page suivante*}
+        <a href="{base_url('/cocktails/')}/{$nextPage}" class="btn btn-purple col-1">></a>
     </div>
 {/block}

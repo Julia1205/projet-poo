@@ -4,12 +4,11 @@
 {block name="title"}My account{/block}
 {*On affiche le contenu de la page*}
 {block name="content"}
-{if isset($array)}
-Bonjour {$array['name']}
-{else}
-<p>ALED</p>
+
+{if isset($mesg)}
+    {$mesg}
 {/if}
-    <h1 class="text-uppercase text-underline text-center my-5">Manage my account</h1>
+    <h1 class="text-uppercase text-underline text-center my-5">Manage {$array['user_pseudo']} account</h1>
     {*La partie pour modifier les informations du compte*}
     <section class="mask d-flex align-items-center h-100">
         <div class="container h-100">
@@ -18,29 +17,62 @@ Bonjour {$array['name']}
                     <div class="card border-purple" style="border-radius: 15px;">
                         <div class="card-body p-5">
                             <h2 class="text-uppercase text-center mb-5">Update informations</h2>
-                            <form>
+                            <form method="POST" action="{base_url('/account')}">
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="form3Example1cg" value='{$array['name']}' class="form-control form-control-lg" />
+                                    <input type="text" id="form3Example1cg" name="name" value='{$array['user_pseudo']}' class="form-control form-control-lg" />
                                     <label class="form-label" for="form3Example1cg">My Username</label>
+                                    <span class="text-danger text-sm">
+                                        {if isset($validation)}
+                                            {display_form_errors($validation, 'name')}
+                                        {else}
+                                        {/if}
+                                    </span>
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
+                                    <input type="email" id="form3Example3cg" name="mail" value='{$array['user_mail']}' class="form-control form-control-lg" />
                                     <label class="form-label" for="form3Example3cg">My Email</label>
+                                    <span class="text-danger text-sm">
+                                        {if isset($validation)}
+                                            {display_form_errors($validation, 'mail')}
+                                        {else}
+                                        {/if}
+                                    </span>
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
+                                    <input type="password" id="form3Example4cg" name="old_password" class="form-control form-control-lg" />
                                     <label class="form-label" for="form3Example4cg">My Actual Password</label>
+                                    <span class="text-danger text-sm">
+                                        {if isset($validation)}
+                                            {display_form_errors($validation, 'old_password')}
+                                        {else}
+                                        {/if}
+                                        {if isset(session('pwdError'))}
+                                            {session('pwdError')}
+                                        {/if}
+                                    </span>
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
+                                    <input type="password" id="form3Example4cdg" name="new_password" class="form-control form-control-lg" />
                                     <label class="form-label" for="form3Example4cdg">My New Password</label>
+                                    <span class="text-danger text-sm">
+                                        {if isset($validation)}
+                                            {display_form_errors($validation, 'new_password')}
+                                        {else}
+                                        {/if}
+                                    </span>
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
+                                    <input type="password" id="form3Example4cdg" name="confirm_new_password" class="form-control form-control-lg" />
                                     <label class="form-label" for="form3Example4cdg">Repeat My New Password</label>
+                                    <span class="text-danger text-sm">
+                                        {if isset($validation)}
+                                            {display_form_errors($validation, 'confirm_new_password')}
+                                        {else}
+                                        {/if}
+                                    </span>
                                 </div>
                                 <div class="d-flex justify-content-center">
-                                    <button type="button" class="btn btn-purple btn-block btn-lg text-body">Update my informations</button>
+                                    <button type="submit" class="btn btn-purple btn-block btn-lg text-body">Update my informations</button>
                                 </div>
                             </form>
                         </div>
