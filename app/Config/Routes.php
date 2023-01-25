@@ -57,8 +57,7 @@ $routes->get('/account', 'Auth::updateInfoUser');
 
 $routes->get('/registerUser', 'Auth::index');
 $routes->post('/registerUser', 'Auth::registerUser');
-$routes->get('/addCocktail', 'Cocktails::addCocktail');
-$routes->post('/formatCocktail', 'Cocktails::formatCocktail');
+$routes->post('/cocktail/add', 'Cocktails::cocktailAdd');
 
 /*La partie des pages de règlementation*/
 /*-- L'accès à la page de la RGPD --*/
