@@ -41,7 +41,12 @@ class Cocktails_model extends Model{
         protected $updatedField  = 'cocktail_updated_at';
         protected $deletedField  = 'cocktail_deleted_at';
 
-    public function addCocktail($arrCocktailToSave)
+    /**
+     * @param array $arrCocktailToSave
+     * @return Int
+     * @throws \ReflectionException
+     */
+    public function addCocktail(Array $arrCocktailToSave): Int
     {
         $arrErrors = "";
         //initializing cocktail object
@@ -52,17 +57,48 @@ class Cocktails_model extends Model{
             $boolCocktailInserted = $this->save($cocktail_entity, false); //saving cocktail object, returning false if not inserted
             if($boolCocktailInserted){//if cocktail is inserted, retrieving the ID
                 return $this->getInsertID();
-            }else{
-                $arrErrors += "Oops, l'update des cocktails n'a pas fonctionné!";
             }
+            $arrErrors .= "Oops, l'update des cocktails n'a pas fonctionné!";
         }else{
             return $exists->cocktail_id;
         }
     }
 
-    public function getCocktailByID($intId)
+    /**
+     * @param Int $intId
+     * @return object
+     */
+    public function getCocktailByID(Int $intId): object
     {
         $objCocktail = $this->where('cocktail_id', $intId)->first();
         return $objCocktail;
+    }
+
+    /*On cherche à récupérer les cocktails d'une page donnée.*/
+    /**
+     * @param Int $intPage
+     * @return array
+     */
+    public function getCocktailByPage(Int $intPage): array {
+        $maxResults = 15;
+        $offset = ($maxResults * ($intPage - 1)) + 1;
+        //orderBy('cocktail_name', 'ASC')->limit(1, 1)->findAll();
+        return $this->orderBy('cocktail_name', 'ASC')->findAll($maxResults, $offset);
+    }
+
+    /**
+     * @return Int
+     */
+    public function getCocktailPageNumber(): Int {
+        $request = $this->countAllResults();
+        $maxPage = $request / 15;
+        $dotPos = strpos($maxPage, '.');
+        return (int)substr($maxPage, 0, $dotPos) + 1;
+    }
+
+    public function getCocktail($strName)
+    {
+        $result = $this->like('cocktail_name', $strName)->findAll();
+        return $result;
     }
 }

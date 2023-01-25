@@ -25,25 +25,32 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Cocktail list</a>
+                    <a class="nav-link active" aria-current="page" href="{base_url('/cocktails/1')}">Cocktail list</a>
                 </li>
+                {if !isset($smarty.session.loggedUser)}
                 {*On affiche si on est pas connecté*}
                 <li class="nav-item">
-                    <a class="nav-link" href="{base_url('/login')}">Log In</a>
+                    <a class="nav-link" href="{base_url('/login')}">Log In / Register</a>
                 </li>
+                {/if}
                 {*Fin de l'affichage hors connexion*}
                 {*On affiche si on est connecté*}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">New cocktail</a>
+                    <a class="nav-link" href="{base_url('/cocktail/add')}">New cocktail</a>
                 </li>
+                {if isset($smarty.session.loggedUser)}
                 <li class="nav-item">
                     <a class="nav-link" href="{base_url('/logout')}">Log Out</a>
                 </li>
+                {/if}
                 {*Fin de l'affichage en connexion*}
+                {if isset($smarty.session.loggedUser)}
+                    <a class="nav-link" href="{base_url('/account')}">Account</a>
+                {/if}
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-purple" type="submit">Search</button>
+            <form class="d-flex" role="search" method='post' action="{base_url('/cocktail/search/')}">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search"/>
+                <input type='submit' class="btn btn-purple"/>
             </form>
         </div>
     </div>

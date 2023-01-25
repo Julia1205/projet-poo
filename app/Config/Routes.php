@@ -36,28 +36,32 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-//$routes->get('/', 'Home::index');
+
+/*Les routes de base*/
+/*-- La route pour charger les cocktails depuis l'API --*/
 $routes->get('/fetch', 'Cocktails::fetchCocktails');
 /*-- L'accès à la page d'accueil --*/
 $routes->get('/', 'Home::index');
+/*-- L'accès à la page listant l'ensemble des cocktails --*/
+$routes->get('/cocktails/(:num)', 'Home::cocktailsList/$1');
 
 /*La partie de gestion des utilisateurs*/
 /*-- L'accès à la page de connexion pour l'utilisateur --*/
 $routes->get('/login', 'Users::connectUser');
 $routes->post('/login', 'Auth::loginUser');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
-$routes->get('/logout', 'Users::disconnectUser');
+$routes->get('/logout', 'Auth::logOut');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
 $routes->get('/register', 'Auth::index');
 $routes->get('/registerUser', 'Auth::index');
 $routes->post('/registerUser', 'Auth::registerUser');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
-$routes->get('/account', 'Auth::updateInfoUser');
-
+$routes->get('/account', 'Users::myAccount');
+$routes->post('/account', 'Auth::updateInfoUser');
 
 $routes->get('/registerUser', 'Auth::index');
 $routes->post('/registerUser', 'Auth::registerUser');
-$routes->get('/addCocktail', 'Cocktails::addCocktail');
+$routes->post('/cocktail/add', 'Cocktails::cocktailAdd');
 $routes->post('/formatCocktail', 'Cocktails::formatCocktail');
 
 /*La partie des pages de règlementation*/
@@ -65,16 +69,21 @@ $routes->post('/formatCocktail', 'Cocktails::formatCocktail');
 $routes->get('/gdpr', 'Home::gdpr');
 /*-- L'accès à la page des Conditions Générales d'Utilisation --*/
 $routes->get('/gcu', 'Home::gcu');
+
 /*La partie des cocktails (ajout, lecture, modification, suppression*/
 /*-- L'accès à la page d'ajout de cocktail --*/
 $routes->get('/cocktail/add', 'Cocktails::cocktailAdd');
+//$routes->get('/addCocktail', 'Cocktails::addCocktail');
+$routes->post('/cocktail/add', 'Cocktails::cocktailAdd');
+$routes->post('/cocktail/search/', 'Cocktails::cocktailSearch');
+
+
 /*-- L'accès à la page pour consulter un cocktail --*/
 $routes->get('/cocktail/view/(:num)', 'Cocktails::cocktailView/$1');
 /*-- L'accès à la page de modification de cocktail --*/
 $routes->get('/cocktail/update/(:num)', 'Cocktails::cocktailUpdate/$1');
 /*-- L'accès à la page de suppression de cocktail --*/
 $routes->get('/cocktail/delete/(:num)', 'Cocktails::cocktailDelete/$1');
-
 
 /*
  * --------------------------------------------------------------------
