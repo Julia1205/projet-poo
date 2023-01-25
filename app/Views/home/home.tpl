@@ -18,11 +18,11 @@
                         <h5 class="card-title">{$item->cocktail_name}</h5>
                         <p class="card-text">
                             {if $item->cocktail_is_alcoholic == 1}
-                                Avec alcool
+                                With alcool
                             {elseif $item->cocktail_is_alcoholic == 0}
-                                Sans alcool
+                                Within alcool
                             {else}
-                                Erreur
+                                Error
                             {/if}
                         </p>
                         {*On permet d'aller sur la fiche du cocktail*}
