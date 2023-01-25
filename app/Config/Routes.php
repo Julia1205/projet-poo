@@ -46,7 +46,7 @@ $routes->get('/', 'Home::index');
 $routes->get('/login', 'Users::connectUser');
 $routes->post('/login', 'Auth::loginUser');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
-$routes->get('/logout', 'Users::disconnectUser');
+$routes->get('/logout', 'Auth::logOut');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
 $routes->get('/register', 'Auth::index');
 $routes->get('/registerUser', 'Auth::index');

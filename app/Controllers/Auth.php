@@ -127,8 +127,17 @@ class Auth extends BaseController
             'name' => $userInfo['user_pseudo']
         ];
 
+        $username = $this->request->getPost('name');
+        
+
         $this->_data['array'] = $data;
         return  $this->display('user/account.tpl');
+    }
+
+    public function logOut()
+    {
+        session()->destroy();
+        return redirect('/');
 
     }
 }
