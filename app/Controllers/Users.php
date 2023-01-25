@@ -14,50 +14,27 @@
  *  <li><strong>disconnectUser</strong> : méthode de déconnexion
  * </ul>
  */
-
  //namespace App\Controllers;
 // use App\Controller\BaseController;
  //use CodeIgniter\Controller;
- 
+
  namespace App\Controllers;
  use App\Models\Users_model;
  use App\Entities\Users_entity;
-
 class Users extends BaseController
 {
     public function __construct()
     {
         $validation =  \Config\Services::validation();
     }
-
-    /**
-     *
-     */
-
-    public function registerUser(): void
-    {
-        
-        
-    }
-    
-
-    /**
-     *
-     */
     public function updateUser(): void
     {
-        
         //redirige vers la fiche utilisateur
         $this->_data['title'] = "My account";
         $this->display('user/account.tpl');
     }
-
-    /**
-     *
-     */
     public function connectUser(): void
     {
-        
         var_dump($this->_session->get('user_id'));
         # code...
         $arrAttributesUsernameInput = 
@@ -92,10 +69,6 @@ class Users extends BaseController
         //Ou home si connexion réussie
         //$this->display('home/home.tpl');
     }
-
-    /**
-     *
-     */
     public function disconnectUser(): void
     {
         # code...

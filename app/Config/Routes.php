@@ -36,10 +36,14 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-//$routes->get('/', 'Home::index');
+
+/*Les routes de base*/
+/*-- La route pour charger les cocktails depuis l'API --*/
 $routes->get('/fetch', 'Cocktails::fetchCocktails');
 /*-- L'accès à la page d'accueil --*/
 $routes->get('/', 'Home::index');
+/*-- L'accès à la page listant l'ensemble des cocktails --*/
+$routes->get('/cocktails', 'Home::cocktailsList');
 
 /*La partie de gestion des utilisateurs*/
 /*-- L'accès à la page de connexion pour l'utilisateur --*/
@@ -54,15 +58,12 @@ $routes->post('/registerUser', 'Auth::registerUser');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
 $routes->get('/account', 'Users::updateUser');
 
-
-/*A SUPPRIMER*/
-$routes->get('/addCocktail', 'Cocktails::addCocktailView');
-
 /*La partie des pages de règlementation*/
 /*-- L'accès à la page de la RGPD --*/
 $routes->get('/gdpr', 'Home::gdpr');
 /*-- L'accès à la page des Conditions Générales d'Utilisation --*/
 $routes->get('/gcu', 'Home::gcu');
+
 /*La partie des cocktails (ajout, lecture, modification, suppression*/
 /*-- L'accès à la page d'ajout de cocktail --*/
 $routes->get('/cocktail/add', 'Cocktails::cocktailAdd');

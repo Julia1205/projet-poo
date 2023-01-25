@@ -36,4 +36,8 @@ class Home extends BaseController
         $this->_data['title'] = "GCU - ";
         $this->display('reglementation/gcu.tpl');
     }
+    public function cocktailsList(): void {
+        $this->_data['title'] = "";
+        $this->display('cocktail/list.tpl');
+    }
 }
