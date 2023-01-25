@@ -48,9 +48,9 @@
                     <a class="nav-link" href="{base_url('/account')}">Account</a>
                 {/if}
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-purple" type="submit">Search</button>
+            <form class="d-flex" role="search" method='post' action="{base_url('/cocktail/search/')}">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search"/>
+                <input type='submit' class="btn btn-purple"/>
             </form>
         </div>
     </div>

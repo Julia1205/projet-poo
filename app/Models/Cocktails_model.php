@@ -95,4 +95,10 @@ class Cocktails_model extends Model{
         $dotPos = strpos($maxPage, '.');
         return (int)substr($maxPage, 0, $dotPos) + 1;
     }
+
+    public function getCocktail($strName)
+    {
+        $result = $this->like('cocktail_name', $strName)->findAll();
+        return $result;
+    }
 }

@@ -73,8 +73,10 @@ $routes->get('/gcu', 'Home::gcu');
 /*La partie des cocktails (ajout, lecture, modification, suppression*/
 /*-- L'accès à la page d'ajout de cocktail --*/
 $routes->get('/cocktail/add', 'Cocktails::cocktailAdd');
-$routes->get('/addCocktail', 'Cocktails::addCocktail');
+//$routes->get('/addCocktail', 'Cocktails::addCocktail');
 $routes->post('/cocktail/add', 'Cocktails::cocktailAdd');
+$routes->post('/cocktail/search/', 'Cocktails::cocktailSearch');
+
 
 /*-- L'accès à la page pour consulter un cocktail --*/
 $routes->get('/cocktail/view/(:num)', 'Cocktails::cocktailView/$1');
@@ -82,7 +84,6 @@ $routes->get('/cocktail/view/(:num)', 'Cocktails::cocktailView/$1');
 $routes->get('/cocktail/update/(:num)', 'Cocktails::cocktailUpdate/$1');
 /*-- L'accès à la page de suppression de cocktail --*/
 $routes->get('/cocktail/delete/(:num)', 'Cocktails::cocktailDelete/$1');
-
 
 /*
  * --------------------------------------------------------------------

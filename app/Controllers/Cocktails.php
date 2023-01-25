@@ -140,6 +140,7 @@ class Cocktails extends BaseController
      *
      */
     final public function cocktailAdd(): void {
+		$this->_data['arrErrors'] = array();
 		$this->validation->setRules(
 			[
 				'name' => 
@@ -151,14 +152,14 @@ class Cocktails extends BaseController
 						'is_unique' => 'Ce cocktail existe déjà',
 						],
 				],
-				/*'glass' => 
+				'glass' => 
 				[
 					'rules' => 'required',
 					'errors' => 
 					[
 						'required' => 'Il est obligatoire de sélectionner un verre',
 					],
-				],*/
+				],
 				'alcoholic' =>
 				[
 					'rules' => 'required',
@@ -271,6 +272,7 @@ class Cocktails extends BaseController
 				}
 			}
 			//var_dump($arrIngredientsOptions);
+
 		$this->_data['form_open'] = form_open("cocktail/add");
 		$this->_data['input_name'] = form_input($arrAttributesNameInput);
 		$this->_data['label_name'] = form_label('Name', 'name', $arrLabelAttributes);
@@ -324,4 +326,15 @@ class Cocktails extends BaseController
         $this->_data['title'] = 'Delete cocktail - ';
         $this->display('cocktail/delete.tpl');
     }
+
+	public function cocktailSearch()
+	{
+		if(count($this->request->getPost()) > 0 ){
+			//var_dump($this->request->getPost('search'));
+			$cocktail_model = new Cocktails_model;
+			$this->_data['allCocktail'] = $cocktail_model->getCocktail($this->request->getPost('search'));
+			$this->_data['title'] = "Recherche - ";
+			$this->display('home/home.tpl');
+		}
+	}
  }
