@@ -50,13 +50,16 @@ $routes->get('/cocktails', 'Home::cocktailsList');
 $routes->get('/login', 'Users::connectUser');
 $routes->post('/login', 'Auth::loginUser');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
-$routes->get('/logout', 'Users::disconnectUser');
+$routes->get('/logout', 'Auth::logOut');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
 $routes->get('/register', 'Auth::index');
 $routes->get('/registerUser', 'Auth::index');
 $routes->post('/registerUser', 'Auth::registerUser');
 /*-- L'accès à la page de déconnexion pour l'utilisateur --*/
-$routes->get('/account', 'Users::updateUser');
+$routes->get('/account', 'Users::myAccount');
+$routes->post('/account', 'Auth::updateInfoUser');
+
+$routes->post('/formatCocktail', 'Cocktails::formatCocktail');
 
 /*La partie des pages de règlementation*/
 /*-- L'accès à la page de la RGPD --*/
@@ -67,6 +70,7 @@ $routes->get('/gcu', 'Home::gcu');
 /*La partie des cocktails (ajout, lecture, modification, suppression*/
 /*-- L'accès à la page d'ajout de cocktail --*/
 $routes->get('/cocktail/add', 'Cocktails::cocktailAdd');
+$routes->get('/addCocktail', 'Cocktails::addCocktail');
 /*-- L'accès à la page pour consulter un cocktail --*/
 $routes->get('/cocktail/view/(:num)', 'Cocktails::cocktailView/$1');
 /*-- L'accès à la page de modification de cocktail --*/

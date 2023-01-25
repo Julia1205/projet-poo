@@ -111,8 +111,78 @@ class Auth extends BaseController
             return redirect()->to('/');
         }
 
-        $this->_data['array'] = "oui";
         $this->_data['title'] = "title";
         return  $this->display('user/login.tpl');
+    }
+
+    public function updateInfoUser()
+    {
+        //Get user informations
+        $userModel = new UserModel();
+        $loggedInUserId = session()->get('loggedUser');
+        $userInfo = $userModel->find($loggedInUserId);
+
+        $userData = [
+            'user_pseudo' => $userInfo['user_pseudo'],
+            'user_mail' => $userInfo['user_mail']
+        ];
+
+        // This is the validation part
+        $validated = $this->validate([
+            'name' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Your name is required',
+                ]
+            ],
+            'mail' => [
+                'rules' => 'required|valid_email',
+                'errors' => [
+                    'required' => 'Your mail is required',
+                    'valid_email' => 'Your mail need to be valid',
+                ]
+            ],
+        ]);
+        
+        // If it's not validate, we are coming back to the account page without post informations
+        if (!$validated) {
+            $this->_data['title'] = "My account ";
+            $this->_data['validation'] = $this->validator;
+            $this->_data['array'] = $userData;
+           return  $this->display('user/account.tpl');
+        }
+
+        // Getting the form informations
+        $username = $this->request->getPost('name');
+        $mail = $this->request->getPost('mail');
+        $oldPassword = $this->request->getPost('old_password');
+        $newPassword = $this->request->getPost('new_password');
+
+        $newUserData = [
+            'user_pseudo' => $username,
+            'user_mail' => $mail
+        ];
+        
+        // Verification if password change is entered and if old password field is similar to pwd in db
+        if (!empty($oldPassword) && !empty($newPassword)){
+            if (Hash::check($oldPassword, $userInfo['user_pwd'])){
+                $userPwdData = [
+                    'user_pwd' => Hash::encrypt($newPassword),
+                ];
+                $userModel->update($userInfo, $userPwdData);
+            }
+            else{
+                session()->setFlashdata('pwdError', "Your old password do not match with the password you've entered");
+            }
+        }
+        $userModel->update($userInfo, $newUserData);
+        return redirect()->to('/account');
+    }
+
+    public function logOut()
+    {
+        session()->destroy();
+        return redirect('/');
+
     }
 }

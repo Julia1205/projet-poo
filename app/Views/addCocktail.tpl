@@ -9,10 +9,11 @@
     {$input_receipe}<br>
     {$label_receipe}<br>
     {$input_glass}<br>
-    <div id='test'>
-        {$input_ingredients}
-        {$input_quantity}<br>
-    </div>
+    {for $foo=1 to 15}
+        {$input_ingredient.$foo}
+        {$input_quantity.$foo}
+    {/for}
+    {$form_submit}
 {$form_close}
     <button id='addIngredientLine'>add</button>
 {/block}
