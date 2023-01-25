@@ -35,4 +35,15 @@ class Ingredient_model extends Model{
             }
         }
     }
+    public function getIngredientNameById($id)
+    {
+        $arrObjIngredient = array();
+        foreach ($id as $key => $value) {
+            //var_dump($id[$key]->cocktail_ingredient_ingredient_id);
+            $arrObjIngredient[] = $this->where('ingredient_id', $id[$key]->cocktail_ingredient_ingredient_id)->first();
+
+        }
+        return $arrObjIngredient;
+
+    }
 }

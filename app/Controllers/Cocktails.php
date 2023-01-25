@@ -266,6 +266,17 @@ class Cocktails extends BaseController
      * @param Int $intCocktailId
      */
     final public function cocktailView(Int $intCocktailId): void {
+
+        $arrObjCocktail = array();
+        $cocktail_model = new Cocktails_model;
+        $cocktail_model->getCocktailByID($intCocktailId);
+        $arrObjCocktail[] = $cocktail_model->getCocktailByID($intCocktailId);
+        $this->_data['allCocktail'] = $arrObjCocktail;
+        //var_dump($arrObjCocktail);
+        $cocktail_ingredient_model = new Cocktail_ingredient_model;
+        $arrObjCtest = $cocktail_ingredient_model->getCocktailIngredientById($intCocktailId);
+        //var_dump($arrObjCtest);
+        $this->_data['Cocktail_ingredient_model'] = $arrObjCtest;
         $this->_data['title'] = 'View cocktail - ';
         $this->display('cocktail/view.tpl');
     }
